@@ -18,11 +18,12 @@ class Trie {
       currentNode = currentNode.child[letter];
     })
 
-    if (!currentNode.wordEnd) {
+    if (!currentNode.isWord) {
       currentNode.isWord = true;
       this.count++;
     }
-    currentNode.wordEnd = true;
+  }
+    // currentNode.wordEnd = true;
 
 // if it exists, then it becomes the current node and 
   //then we check for the next letter.
@@ -31,7 +32,6 @@ class Trie {
 //then we repeat until the end of the word.
 
 // set word to true. (base case)
-  }
 
   suggest(string) {
     let currentNode = this.root;
@@ -44,14 +44,16 @@ class Trie {
     //wont suggest anything.  will only work if someone puts in dub shit or number.
 
     lowerCaseWord.forEach((letter) => {
-      if (currentNode.child){
+      if (currentNode.child[letter]){
         currentNode = currentNode.child[letter]
       }
     })
 
     const findWord = (string, currentNode) => {
       //current node that is passed in is the last letter of string from suggest().
-      if (currentNode.wordEnd){
+      console.log(currentNode)
+
+      if (currentNode.isWord){
         suggestions.push(string);
       }
 
@@ -60,10 +62,10 @@ class Trie {
         
         childKeys.forEach((key) => {
           //going to run through the findWOrd for each key (s,t,o)
-          let childNode = currentNode.child[key];
+          currentNode = currentNode.child[key];
           let newString = string + key;
 
-          findWord(newString, childNode)
+          findWord(newString, currentNode)
         });
       }
     }

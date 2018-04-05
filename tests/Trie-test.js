@@ -44,7 +44,7 @@ describe('TRIE', () => {
   describe('INSERT', () => {
     it('should add a letter to the trie', () => {
       trie.insert('pizza');
-      console.log(JSON.stringify(trie, null, 2));
+      // console.log(JSON.stringify(trie, null, 2));
       expect(trie.count).to.equal(1)
       expect(trie.root.child.p.letter).to.equal('p')
       expect(trie.root.child.p.child.i.letter).to.equal('i')
@@ -58,6 +58,8 @@ describe('TRIE', () => {
         trie.insert('bats');
         trie.insert('batter');
         trie.insert('baton');
+
+        trie.suggest('ba');
   
       expect(trie.suggest('ba')).to.deep.equal(['bat', 'bats', 'batter', 'baton'])
     })
