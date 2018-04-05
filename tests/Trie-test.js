@@ -1,6 +1,12 @@
-const { expect } = require('chai');
+import { expect } from 'chai';
+import { assert} from 'chai';
+// import fs from 'fs'
 const Node = require('../scripts/Node');
 const Trie = require('../scripts/Trie');
+
+// const text = "/usr/share/dict/words"
+// const dictionary = fs.readFileSync(text).toString().trim().split('\n')
+
 require('locus');
 
 describe('TRIE', () => {
@@ -28,7 +34,6 @@ describe('TRIE', () => {
     trie.insert('desk');
     trie.insert('cat');
 
-
     expect(trie.count).to.eq(3);
   });
   
@@ -48,17 +53,13 @@ describe('TRIE', () => {
 
   describe('SUGGEST', () => {
     it ('should provide suggestions based on input', () => {
-        let trie = new Trie();
+      let trie = new Trie();
         trie.insert('bat');
         trie.insert('bats');
         trie.insert('batter');
         trie.insert('baton');
   
-        trie.suggest('ba');
-        
-      let suggest = trie.suggest('ba')
-        console.log(suggest)
-      expect(suggest === ['bat', 'bats', 'batter', 'baton', 'bathmat', 'bathtub'])
+      expect(trie.suggest('ba')).to.deep.equal(['bat', 'bats', 'batter', 'baton'])
     })
   })  
 })

@@ -10,7 +10,6 @@ class Trie {
   insert(word) {
     let lowerCaseWord = word.toLowerCase().split('');
     let currentNode = this.root;
-    // let child = currentNode.child;
 
     lowerCaseWord.forEach(( letter ) => {
       if (!currentNode.child[letter]){
@@ -24,6 +23,7 @@ class Trie {
       this.count++;
     }
     currentNode.wordEnd = true;
+
 // if it exists, then it becomes the current node and 
   //then we check for the next letter.
 // if it doesnt exisdt then we create a new node
@@ -35,12 +35,13 @@ class Trie {
 
   suggest(string) {
     let currentNode = this.root;
-    let suggestions = [];
     let lowerCaseWord = string.toLowerCase().split('');
+    let suggestions = [];
 
     if (!currentNode.child[lowerCaseWord[0]]){
       return [];
     }
+    //wont suggest anything.  will only work if someone puts in dub shit or number.
 
     lowerCaseWord.forEach((letter) => {
       if (currentNode.child){
@@ -48,32 +49,37 @@ class Trie {
       }
     })
 
-      const findWord = (string, currentNode) => {
-        if (currentNode.endOfWord){
-          suggestions.push(word);
-        }
-
-        if (currentNode.child) {
-          let childKeys = Object.keys(currentNode.child);
-          
-          childKeys.forEach((key) => {
-            let childNode = currentNode.child[key];
-            let newString = string + key;
-
-            findWord(newString, childNode)
-          });
-        }
+    const findWord = (string, currentNode) => {
+      //current node that is passed in is the last letter of string from suggest().
+      if (currentNode.wordEnd){
+        suggestions.push(string);
       }
 
-      findWord(string, currentNode);
-      return suggestions
+      if (currentNode.child) {
+        let childKeys = Object.keys(currentNode.child);
+        
+        childKeys.forEach((key) => {
+          //going to run through the findWOrd for each key (s,t,o)
+          let childNode = currentNode.child[key];
+          let newString = string + key;
+
+          findWord(newString, childNode)
+        });
       }
     }
 
+    findWord(string, currentNode);
+    // console.log(suggestions);
+    return suggestions
+  }
 
-// if (!currentNode.child && currentNode.endOfWord) {
-//   return this.suggestions;
-// }
+    // populate(wordArray) {
+    //   wordArray.forEach((word) => this.insert(word))
+    // }
+}
+
+
+
   // Check if the node in the string has a child.
   // check if the child is an End Of Word.
   // if EOW, push into an array and the completed word is now the current word and join.
