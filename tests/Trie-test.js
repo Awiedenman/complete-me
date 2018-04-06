@@ -85,8 +85,30 @@ describe('TRIE', () => {
     })
 
 
-    it.skip('should update the weight property of a word that has been selected')
+    it ('should update the weight property of a word that has been selected', () => {
+      trie.insert('sleep');
+      trie.insert('see');
+      trie.insert('sleight');
+      trie.insert('sight');
 
+      trie.select('see');
+
+      expect(trie.root.child.s.child.e.child.e.weight).to.equal(1)
+
+    })
+
+    it('should update the weight property of a word that has been selected', () => {
+
+      trie.insert('see');
+      trie.insert('sleep');
+      trie.insert('sleight');
+      trie.insert('sight');
+
+      trie.select('sleep');
+
+      expect(trie.suggest('s')).to.deep.equal(['sleep', 'see', 'sleight', 'sight'])
+
+    })
   })
 })
 
