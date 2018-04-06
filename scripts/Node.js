@@ -2,8 +2,8 @@ class Node {
   constructor(letter = null) {
    this.letter = letter;
    this.isWord = false;
-  //  this.prefixes = 0;
    this.child = {};
+   this.weight = 0;
   }
 }
 

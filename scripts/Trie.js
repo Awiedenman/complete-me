@@ -44,7 +44,11 @@ class Trie {
     const findWord = (string, currentNode) => {
       //current node that is passed in is the last letter of string from suggest().
       if (currentNode.isWord) {
+        if (currentNode.weight >= 1){
+          suggestions.unshift(string);
+        } else {
         suggestions.push(string);
+        }
       }
 
       if (currentNode.child) {
@@ -68,8 +72,20 @@ class Trie {
   populate(wordArray) {
     wordArray.forEach((word) => this.insert(word))
   }
-}
+  
+  select(suggestion) {
+    let lowerCaseWord = [...suggestion.toLowerCase()];
+    let currentNode = this.root;
 
+    lowerCaseWord.forEach((letter) => {
+      currentNode = currentNode.child[letter];
+    })
+    currentNode.weight++
+    console.log(currentNode)
+
+    return currentNode
+  }
+}
 
 
 // Check if the node in the string has a child.

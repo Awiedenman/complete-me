@@ -44,7 +44,7 @@ describe('TRIE', () => {
   describe('INSERT', () => {
     it('should add a letter to the trie', () => {
       trie.insert('pizza');
-      console.log(JSON.stringify(trie, null, 2));
+      // console.log(JSON.stringify(trie, null, 2));
       expect(trie.count).to.equal(1)
       expect(trie.root.child.p.letter).to.equal('p')
       expect(trie.root.child.p.child.i.letter).to.equal('i')
@@ -53,7 +53,6 @@ describe('TRIE', () => {
 
   describe('SUGGEST', () => {
     it('should provide suggestions based on input', () => {
-      let trie = new Trie();
       trie.insert('bat');
       trie.insert('bats');
       trie.insert('batter');
@@ -72,5 +71,48 @@ describe('TRIE', () => {
       expect(trie.count).to.equal(234371);
     })
   }) 
-  })
 
+  describe('SELECT', () => {
+    it('should take in words and should prioritize suggestions based on their weight', () => {
+      trie.insert('see');
+      trie.insert('sleep');
+      trie.insert('sleight');
+      trie.insert('sight');
+
+      trie.select('sleep');
+      console.log(JSON.stringify(trie, null, 2));
+
+    })
+
+
+    it ('should update the weight property of a word that has been selected', () => {
+      trie.insert('sleep');
+      trie.insert('see');
+      trie.insert('sleight');
+      trie.insert('sight');
+
+      trie.select('see');
+
+      expect(trie.root.child.s.child.e.child.e.weight).to.equal(1)
+
+    })
+
+    it('should update the weight property of a word that has been selected', () => {
+
+      trie.insert('see');
+      trie.insert('sleep');
+      trie.insert('sleight');
+      trie.insert('sight');
+
+      trie.select('sleep');
+
+      expect(trie.suggest('s')).to.deep.equal(['sleep', 'see', 'sleight', 'sight'])
+
+    })
+  })
+})
+
+// everytime you click a suggestion, add to the weight count in that node constructor.
+// weight will be counted in our node.js file.
+// we are going to need to move the suggestion to the front of the array for that branch of the trie.
+// when you show the suggestions, you should map over the array and show them in decending order of weight.
