@@ -68,8 +68,20 @@ class Trie {
   populate(wordArray) {
     wordArray.forEach((word) => this.insert(word))
   }
-}
+  
+  select(suggestion) {
+    let lowerCaseWord = [...suggestion.toLowerCase()];
+    let currentNode = this.root;
 
+    lowerCaseWord.forEach((letter) => {
+      currentNode = currentNode.child[letter];
+    })
+    currentNode.weight++
+    console.log(currentNode)
+    
+  }
+  
+}
 
 
 // Check if the node in the string has a child.
