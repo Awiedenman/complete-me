@@ -1,7 +1,7 @@
 {
-  "name": "complete-me",
+  "name": "@awiedenman/complete-me",
   "version": "0.0.0",
-  "description": "",
+  "description": "Learning to build and work with a binary search trie by making a low level version of an auto-complete system.",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ecksi/complete-me.git"
+    "url": "git+https://github.com/Awiedenman/complete-me.git"
   },
   "keywords": [],
-  "author": "Jim Dechant",
+  "author": "Austin Wiedenman",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ecksi/complete-me/issues"
+    "url": "https://github.com/Awiedenman/complete-me/issues"
   },
-  "homepage": "https://github.com/Ecksi/complete-me#readme",
+  "homepage": "https://github.com/Awiedenman/complete-me#readme",
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
@@ -36,5 +36,9 @@
     "http-server": "^0.11.1",
     "webpack": "^3.10.0",
     "webpack-cli": "^2.0.11"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {}
 }
