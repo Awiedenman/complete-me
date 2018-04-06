@@ -6,7 +6,7 @@ const Trie = require('../scripts/Trie');
 
 // const text = "/usr/share/dict/words"
 // const dictionary = fs.readFileSync(text).toString().trim().split('\n')
-
+// console.log(dictionary.length)
 require('locus');
 
 describe('TRIE', () => {
@@ -57,11 +57,34 @@ describe('TRIE', () => {
         trie.insert('bat');
         trie.insert('bats');
         trie.insert('batter');
-        trie.insert('baton');
+        // trie.insert('baton');
+        // trie.insert('bass');
 
         trie.suggest('ba');
-  
-      expect(trie.suggest('ba')).to.deep.equal(['bat', 'bats', 'batter', 'baton'])
+      // console.log(trie.suggest('ba'));
+      expect(trie.suggest('ba')).to.deep.equal(['bat', 'bats', 'batter'/*, 'baton', 'bass']*/])
     })
-  })  
+
+    it('should have 235,886 words in the dictionary', () => {
+      expext(trie.populate).to.equal(235886);
+    })
+  }) 
+
+  describe('DELETE', () => {
+    it('should delete suggstion')
+    let trie = new Trie();
+    trie.insert('bat');
+    trie.insert('bats');
+    trie.insert('batter');
+
+    // trie.delete('bat');
+
+    expect(trie.suggest('ba')).to.equal(['bats', 'batter'])
+  })
+  
+  // describe('SELECT', () => {
+  //   it('should update the weight property of a word that has been selected')
+  
+  //   it('should prioritize suggestins based on their weight')
+  // })
 })
