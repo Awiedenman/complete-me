@@ -81,9 +81,7 @@ describe('TRIE', () => {
 
       trie.select('sleep');
       console.log(JSON.stringify(trie, null, 2));
-
     })
-
 
     it ('should update the weight property of a word that has been selected', () => {
       trie.insert('sleep');
@@ -94,7 +92,6 @@ describe('TRIE', () => {
       trie.select('see');
 
       expect(trie.root.child.s.child.e.child.e.weight).to.equal(1)
-
     })
 
     it('should update the weight property of a word that has been selected', () => {
@@ -107,12 +104,7 @@ describe('TRIE', () => {
       trie.select('sleep');
 
       expect(trie.suggest('s')).to.deep.equal(['sleep', 'see', 'sleight', 'sight'])
-
     })
   })
 })
 
-// everytime you click a suggestion, add to the weight count in that node constructor.
-// weight will be counted in our node.js file.
-// we are going to need to move the suggestion to the front of the array for that branch of the trie.
-// when you show the suggestions, you should map over the array and show them in decending order of weight.
